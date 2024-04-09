@@ -1,30 +1,51 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, computed } from 'vue';
+
+const tempSI = defineModel('tempSI', { type: Number, default: 0 });
+
+const tempCelsius = defineModel('tempCelsius', {
+  type: Number,
+  default: 0,
+  get() {
+    return tempSI.value - 273.15;
+  },
+  set(value) {
+    tempSI.value = value + 273.15;
+  },
+});
+
+const foo = [{name: 'John',  email: 'test@example.com'}, {name: 'Doe'}];
+
+const urlWsSchedule = "https://chabloz.eu/files/horaires/all";
+const schedules = ref([]);
+fetch(urlWsSchedule)
+  .then(response => response.json())
+  .then(data => schedules.value = data)
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h1>Temperature Converter</h1>
+    <input type="number" v-model="tempSI" />
+    <input type="number" v-model="tempCelsius" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <p v-if="tempSI < 0">
+    The kelvin is under 0 . Are you sure of the value ?
+  </p>
+  <p v-else-if="tempSI == 0">
+    The kelvin is null.
+  </p>
+  <p v-else>
+    The kelvin is positiv
+  </p>
+  <p v-show="tempSI < 0">
+    The kelvin is under 0 . Are you sure of the value ?
+  </p>
+  <ul>
+    <li v-for="schedule in schedules" :key="item">
+      {{ schedule.label }}
+    </li>
+  </ul>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
