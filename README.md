@@ -1,6 +1,3 @@
-# webmobui-im51
+# Vue 3 + Vite
 
-Code du cours Webmobui IM 51
-
-## Installation
-npm install
+WebMobUi live code repository
