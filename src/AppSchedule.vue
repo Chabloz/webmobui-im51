@@ -1,11 +1,6 @@
 <script setup>
   import { ref, computed } from 'vue';
   import scheduleData from './mock/schedule.json';
-  import { bookmarks } from './stores/bookmarks';
-  console.log(bookmarks.value.push([{
-    id: 1,
-    label: 'test',
-  }]));
 
   const schedule = ref(scheduleData);
 
