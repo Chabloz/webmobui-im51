@@ -46,6 +46,9 @@
     unit="K"
     v-model="tempKelvin"
     :decimal-places="2"
+    step="0.01"
+    min="0"
+    id="kelvin"
   />
 
 </template>

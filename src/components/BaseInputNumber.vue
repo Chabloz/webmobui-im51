@@ -1,5 +1,10 @@
 <script setup>
-import { round } from '../utils/math.js';
+  import { round } from '../utils/math.js';
+
+  defineOptions({
+    inheritAttrs: false
+  })
+
 
   const props = defineProps({
     unit: {
@@ -23,7 +28,11 @@ import { round } from '../utils/math.js';
 
 <template>
   <div>
-    <input v-model="model" type="number">
+    <input
+      v-model="model"
+      type="number"
+      v-bind="$attrs"
+    >
     <span> {{ unit }}</span>
   </div>
 </template>
