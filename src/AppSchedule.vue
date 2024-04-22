@@ -2,6 +2,7 @@
   import { ref, computed } from 'vue';
   import scheduleData from './mock/schedule.json';
   import BaseConfirm from './components/BaseConfirm.vue';
+  import { useJsonStorage } from './composables/jsonStorage.js';
 
   const schedule = ref(scheduleData);
 
@@ -11,7 +12,9 @@
     });
   });
 
-  const showHistory = ref(false);
+  const {data: showHistory} = useJsonStorage('SCHEDULE_history', false);
+  const {data: selectedCourse} = useJsonStorage('SCHEDULE_selectedCourse', 'Tous');
+
 
   const scheduleFiltered = computed(() => {
     if (showHistory.value) {
