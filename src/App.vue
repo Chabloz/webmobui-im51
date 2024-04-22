@@ -6,9 +6,9 @@
   import AppTemperature from './AppTemperature.vue';
 
   const routes = {
-  '#schedule': AppSchedule,
-  '#temperature': AppTemperature,
-}
+    '#schedule': AppSchedule,
+    '#temperature': AppTemperature,
+  }
 
   const currentPath = ref(window.location.hash)
   window.addEventListener('hashchange', () => {
