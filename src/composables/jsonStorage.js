@@ -6,7 +6,7 @@ export function useJsonStorage(key, defaultValue = null) {
 
   data.value = getItem(key, defaultValue);
 
-  watch(data, () => setItem(key, data.value));
+  watch(data, () => setItem(key, data.value), { deep: true });
 
   return { data };
 }

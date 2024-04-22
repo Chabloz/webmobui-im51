@@ -1,8 +1,9 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed, onUnmounted } from 'vue';
   import scheduleData from './mock/schedule.json';
   import BaseConfirm from './components/BaseConfirm.vue';
   import { useJsonStorage } from './composables/jsonStorage.js';
+  import { useKeyboard } from './composables/keyboard.js';
 
   const schedule = ref(scheduleData);
 
@@ -41,6 +42,27 @@
 
   }
 
+  // window.addEventListener("keyup", (event) => {
+  //   console.log('keyup');
+  //   const key = event.key.toUpperCase();
+  //   if (key != 'H') return;
+  //   showHistory.value = !showHistory.value;
+  // });
+
+  // onUnmounted(() => {
+  //   window.removeEventListener("keyup",
+  // });
+
+  const { keyboard } = useKeyboard();
+
+  keyboard.onKey('h', () => {
+    console.log('h');
+    showHistory.value = !showHistory.value;
+  });
+
+  keyboard.onKeys(['Control', 's'], () => {
+    console.log('save to ...');
+  });
 </script>
 
 <template>
